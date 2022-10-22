@@ -1,7 +1,8 @@
 #ifndef LLREC_H
 #define LLREC_H
 #include <cstdlib>
-
+#include <iostream>
+using namespace std;
 /**
  * Node struct for both problems
  */
@@ -78,11 +79,19 @@ Node* llfilter(Node* head, Comp pred);
 template <typename Comp>
 Node* llfilter(Node* head, Comp pred)
 {
-    //*********************************************
-    // Provide your implementation below
-    //*********************************************
-
-
+	if(head == nullptr){
+		return nullptr;
+	}
+  else if(pred(head->val) == true){
+		// if the condition is true we do not want that value in the new list
+		// so we call the function again and after the call we delete the unwanted value
+		Node* temp = llfilter(head->next, pred);
+		delete head;
+		return temp;
+	}
+	else if(pred(head->val) == false){
+		head->next = llfilter(head->next, pred);
+		return head;
+	}
 }
-
 #endif
