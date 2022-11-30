@@ -30,6 +30,7 @@ template <typename T>
       {
       }
 
+
 template <typename T>
    bool Stack<T>::empty() const
    {
@@ -45,23 +46,23 @@ template <typename T>
 template <typename T>
    void Stack<T>::push(const T& item)
    {
-      std::vector<T>::push_back(item);
+      std::vector<T>::insert(this->begin(), item);
    }
 
 template <typename T>
    void Stack<T>::pop(){
-   if(Stack<T>::empty()){
-      throw std::out_of_range("stack is empty");
+   if(Stack<T>::empty() == 0){
+      throw std::underflow_error("stack is empty");
    }
    else{
-      std::vector<T>::pop_back();
+      std::vector<T>::erase(this->begin());
    }
 }
 
 template <typename T>
    T const & Stack<T>::top() const{
-   if(Stack<T>::empty()){
-      throw std::out_of_range("stack is empty");
+   if(Stack<T>::empty() == 0){
+      throw std::underflow_error("stack is empty");
    }
    else{
       return std::vector<T>::front();
